@@ -1,5 +1,6 @@
 #include "common.hpp"
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 
@@ -37,8 +38,8 @@ vector<string> split(const string& s, const string& delimiter) {
 
   while (new_pos != string::npos) {
     token = s.substr(old_pos, new_pos - old_pos);
-		if (!token.empty())
-    	res.push_back(token);
+    if (!token.empty())
+      res.push_back(token);
 
     old_pos = new_pos + 1;
     new_pos = s.find(delimiter, new_pos + 1);
@@ -48,6 +49,35 @@ vector<string> split(const string& s, const string& delimiter) {
   res.push_back(s.substr(old_pos, string::npos));
 
   return res;
+}
+
+// FIXME
+string chomp(const string& s) {
+  string o = s;
+
+  size_t left_pos = 0;
+  size_t right_pos = 0;
+  auto beg = o.begin();
+
+  int i = 0;
+  while (isblank(*beg)) {
+    beg++;
+    i++;
+  }
+
+  auto end = o.end() - 1;
+  int j = o.length();
+  while (isblank(*end)) {
+    end--;
+    j--;
+  }
+
+  cout << "i: " << i << ", j: " << j << ", res: '" << o.substr(i, j) << "'" << endl;
+
+  if (i < j)
+    return o.substr(i, j - 1);
+  else
+    return s;
 }
 
 TEST_CASE("can split string") {
@@ -61,6 +91,16 @@ TEST_CASE("can split string") {
   CHECK(splits[4] == "to");
   CHECK(splits[5] == "4");
 }
+
+// FIXME:
+// TEST_CASE("can chomp strings") {
+//   CHECK(chomp(" 1 2 3 4   5  6   7  ") == "1 2 3 4   5  6   7");
+//   CHECK(chomp("1 2 3 4   5  6   7") == "1 2 3 4   5  6   7");
+//   CHECK(chomp(" ") == "");
+//   CHECK(chomp("  ") == "");
+//   CHECK(chomp("  1") == "1");
+//   CHECK(chomp("1  ") == "1");
+// }
 
 }  // namespace ciccarelli
 }  // namespace dev

@@ -17,6 +17,7 @@
 		"set": "cpp",
 		"string_view": "cpp",
 		"unordered_set": "cpp",
-		"__string": "cpp"
+		"__string": "cpp",
+		"iostream": "cpp"
 	}
 }

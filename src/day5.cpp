@@ -99,7 +99,56 @@ string solve(const string& filename) {
   return tops;
 }
 
-TEST_CASE("part 1") {
-  CHECK(solve("input/day05.sample.txt") == "CMZ");
-  CHECK(solve("input/day05.txt") == "QGTHFZBHV");
+string solvePartTwo(const string& filename) {
+  auto lines = readInput(filename);
+  auto [piles, line] = parsePiles(lines);
+
+  // for (auto pile : piles)
+    // cout << "pile: " << pile << endl;
+
+  auto instructions = parseInstructions(lines, line);
+  for (auto instruction : instructions) {
+    const int howMany = instruction[0];
+    const int fromPileIdx = instruction[1] - 1;
+    const int toPileIdx = instruction[2] - 1;
+
+    // cout << "about to process the tmpPIile (howMany: " << howMany << ", fromPileIdx: " << fromPileIdx << ", toPileIdx: " << toPileIdx << ")\n";
+    vector<char> tmpPile;
+    for (int i = 0; i < howMany; i++) {
+      tmpPile.push_back(piles[fromPileIdx].front());
+
+      // printContainer(tmpPile, "temp pile (pushed): ");
+
+      // cout << "to-erase pile (before): " << piles[fromPileIdx] << endl;
+      piles[fromPileIdx].erase(piles[fromPileIdx].begin());
+      // cout << "erased (after)" << piles[fromPileIdx] << endl;
+    }
+
+    // printContainer(tmpPile, "temp pile: ");
+
+    // cout << "to pile (before): " << piles[toPileIdx] << endl;
+    for (auto x = tmpPile.rbegin(); x != tmpPile.rend(); x++)
+      piles[toPileIdx].insert(piles[toPileIdx].begin(), *x);
+    // cout << "to pile (after): " << piles[toPileIdx] << endl;
+
+    // cout << "executing <" << instruction[0] << ", " << instruction[1] << ", " << instruction[2] << ">:\n";
+    // for (auto pile : piles)
+    //   cout << "pile: " << pile << endl;
+  }
+
+  string tops;
+  for (auto p : piles)
+    tops += p.front();
+
+  return tops;
+}
+
+// TEST_CASE("part 1") {
+//   CHECK(solve("input/day05.sample.txt") == "CMZ");
+//   CHECK(solve("input/day05.txt") == "QGTHFZBHV");
+// }
+
+TEST_CASE("part 2") {
+  CHECK(solvePartTwo("input/day05.sample.txt") == "MCD");
+  CHECK(solvePartTwo("input/day05.txt") == "MCD");
 }
