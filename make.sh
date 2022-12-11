@@ -1,1 +1,1 @@
-clang++ -std=c++11 src/*
+clang++ -std=c++20 -I include/ src/*
