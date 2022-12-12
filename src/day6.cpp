@@ -25,14 +25,14 @@ int solve(const string& filename) {
   auto lines = readInput(filename);
   // cout << "line from file: " << lines[0] << endl;
 
-  return findMarker(lines[0]);
+  return findMarker(lines[0], 4);
 }
 
-int findMarker(const string& buf) {
+int findMarker(const string& buf, const int sequence_length) {
   string marker;
 
   for (int i = 0; i < buf.length(); ++i) {
-    if (marker.length() >= 4)
+    if (marker.length() >= sequence_length)
       marker.erase(0, 1);
 
     marker += buf[i];
@@ -40,7 +40,7 @@ int findMarker(const string& buf) {
     // cout << "marker: " << marker << endl;
 
     const auto h = histogram(marker);
-    if (h.size() == 4) {
+    if (h.size() == sequence_length) {
       // cout << "i: " << i << endl;
       return i + 1;
     }

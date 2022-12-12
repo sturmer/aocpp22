@@ -16,11 +16,12 @@ TEST_CASE("part 2") {
 
 
 TEST_CASE("part 1") {
+	const int MARKER_LENGTH = 4;
   CHECK(dev::ciccarelli::day6::solve("input/day06.sample.txt") == 7);
-	CHECK(dev::ciccarelli::day6::findMarker("bvwbjplbgvbhsrlpgdmjqwftvncz") == 5);
-	CHECK(dev::ciccarelli::day6::findMarker("nppdvjthqldpwncqszvftbrmjlhg") == 6);
-	CHECK(dev::ciccarelli::day6::findMarker("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg") == 10);
-	CHECK(dev::ciccarelli::day6::findMarker("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw") == 11);
+	CHECK(dev::ciccarelli::day6::findMarker("bvwbjplbgvbhsrlpgdmjqwftvncz", MARKER_LENGTH) == 5);
+	CHECK(dev::ciccarelli::day6::findMarker("nppdvjthqldpwncqszvftbrmjlhg", MARKER_LENGTH) == 6);
+	CHECK(dev::ciccarelli::day6::findMarker("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", MARKER_LENGTH) == 10);
+	CHECK(dev::ciccarelli::day6::findMarker("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", MARKER_LENGTH) == 11);
 
   CHECK(dev::ciccarelli::day6::solve("input/day06.txt") == 1140);
 }
