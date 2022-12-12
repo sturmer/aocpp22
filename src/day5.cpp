@@ -1,4 +1,5 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include "day5.hpp"
+
 #include <array>
 #include <fstream>
 #include <iostream>
@@ -7,11 +8,11 @@
 #include <vector>
 
 #include "common.hpp"
-#include "doctest.h"
 
 using namespace std;
 using namespace dev::ciccarelli;
 
+namespace day5 {
 tuple<vector<string>, vector<string>::const_iterator> parsePiles(const vector<string>& lines) {
   vector<string>::const_iterator line = lines.cbegin();
 
@@ -104,7 +105,7 @@ string solvePartTwo(const string& filename) {
   auto [piles, line] = parsePiles(lines);
 
   // for (auto pile : piles)
-    // cout << "pile: " << pile << endl;
+  // cout << "pile: " << pile << endl;
 
   auto instructions = parseInstructions(lines, line);
   for (auto instruction : instructions) {
@@ -142,13 +143,4 @@ string solvePartTwo(const string& filename) {
 
   return tops;
 }
-
-// TEST_CASE("part 1") {
-//   CHECK(solve("input/day05.sample.txt") == "CMZ");
-//   CHECK(solve("input/day05.txt") == "QGTHFZBHV");
-// }
-
-TEST_CASE("part 2") {
-  CHECK(solvePartTwo("input/day05.sample.txt") == "MCD");
-  CHECK(solvePartTwo("input/day05.txt") == "MCD");
-}
+}  // namespace day5

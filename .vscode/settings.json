@@ -18,6 +18,7 @@
 		"string_view": "cpp",
 		"unordered_set": "cpp",
 		"__string": "cpp",
-		"iostream": "cpp"
+		"iostream": "cpp",
+		"fstream": "cpp"
 	}
 }
