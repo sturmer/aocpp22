@@ -11,6 +11,7 @@ namespace day6 {
 
 int findMarker(const std::string& buf, const int sequence_length);
 int solve(const std::string& filename);
+int solvePartTwo(const std::string& filename);
 std::unordered_set<char> histogram(const std::string& buf);
 
 }  // namespace day6

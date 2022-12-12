@@ -28,6 +28,14 @@ int solve(const string& filename) {
   return findMarker(lines[0], 4);
 }
 
+int solvePartTwo(const string& filename) {
+  auto lines = readInput(filename);
+  // cout << "line from file: " << lines[0] << endl;
+
+  return findMarker(lines[0], 14);
+}
+
+
 int findMarker(const string& buf, const int sequence_length) {
   string marker;
 
