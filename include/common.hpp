@@ -24,6 +24,7 @@ void printContainer(const std::vector<T>& c, const char* label) {
 
 std::vector<std::string> readInput(const std::string& filename);
 std::vector<std::string> split(const std::string& s, const std::string& delimiter);
+std::string join(const std::vector<std::string>& s, const std::string& delimiter);
 
 /**
  * Strip blanks from front and back of the string.

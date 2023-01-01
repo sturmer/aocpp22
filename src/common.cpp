@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include "doctest.h"
 
@@ -51,6 +52,21 @@ vector<string> split(const string& s, const string& delimiter) {
   return res;
 }
 
+string join(const vector<string>& s, const string& delimiter) {
+  ostringstream oss;
+
+  if (s.size() <= 1) {
+    return s[0];
+  }
+
+  for (int i = 0; i < s.size() - 1; i++) {
+    oss << s[i] << delimiter;
+  }
+  oss << s[s.size() - 1];
+
+  return oss.str();
+}
+
 // FIXME
 string chomp(const string& s) {
   string o = s;
@@ -90,6 +106,22 @@ TEST_CASE("can split string") {
   CHECK(splits[3] == "3");
   CHECK(splits[4] == "to");
   CHECK(splits[5] == "4");
+}
+
+TEST_CASE("can join strings") {
+  vector<string> vs;
+  vs.push_back("a");
+  vs.push_back("b");
+  vs.push_back("c");
+
+  CHECK(join(vs, "/") == "a/b/c");
+
+  SUBCASE("only 2 strings") {
+    vector<string> vs;
+    vs.push_back("a");
+    vs.push_back("b");
+    CHECK(join(vs, "/") == "a/b");
+  }
 }
 
 // FIXME:
