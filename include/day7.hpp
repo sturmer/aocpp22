@@ -8,6 +8,7 @@ namespace dev {
 namespace ciccarelli {
 namespace day7 {
 	int solve(const std::string& filename);
+	int solvePartTwo(const std::string& filename);
 	Graph parseInstructions(const std::vector<std::string>& instructions);
 } // namespace day7
 } // namespace ciccarelli

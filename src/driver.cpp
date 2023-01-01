@@ -45,36 +45,16 @@ TEST_CASE("day 6") {
 }
 
 TEST_CASE("day 7") {
-  // Node n("/", 100, {});
-
-  // SUBCASE("Node methods") {
-  //   SUBCASE("addChild") {
-  //     Node child("a", 50, {});
-  //     n.addChild(child);
-
-  //     CHECK(n.getChildren().size() == 1);
-  //     CHECK(child.getChildren().empty());
-  //   }
-  // }
-
   SUBCASE("Sample") {
     auto lines = readInput("input/day07.sample.txt");
     Graph graph = day7::parseInstructions(lines);
 
-    // SUBCASE("size") {
-    //   CHECK(graph.size("/") == 48381165);
-    // }
-
-    // SUBCASE("numDirs") {
-    //   CHECK(graph.numDirs() == 4);
-    // }
-
     graph.computeDirSizes();
     // cout << "graph with correct sizes: " << graph << endl;
     CHECK(graph.size["/"] == 48381165);
-    CHECK(graph.size["d"] == 24933642);
-    CHECK(graph.size["a"] == 94853);
-    CHECK(graph.size["e"] == 584);
+    CHECK(graph.size["/-d"] == 24933642);
+    CHECK(graph.size["/-a"] == 94853);
+    CHECK(graph.size["/-a-e"] == 584);
   }
 
   SUBCASE("Real file") {
@@ -96,6 +76,11 @@ TEST_CASE("day 7") {
 
   SUBCASE("part 1") {
     CHECK(day7::solve("input/day07.sample.txt") == 95437);
-    CHECK(day7::solve("input/day07.txt") == 821959); // wrong number but different from the one got in Elixir
+    CHECK(day7::solve("input/day07.txt") == 1084134);
+  }
+
+  SUBCASE("part 2") {
+    CHECK(day7::solvePartTwo("input/day07.sample.txt") == 24933642);
+    CHECK(day7::solvePartTwo("input/day07.txt") == 6183184);
   }
 }

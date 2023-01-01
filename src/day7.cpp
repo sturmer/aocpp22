@@ -1,6 +1,7 @@
 
 #include "day7.hpp"
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -26,6 +27,30 @@ int solve(const string& filename) {
   }
 
   return res;
+}
+
+int solvePartTwo(const std::string& filename) {
+  const int totalFilesystemSize = 70000000;
+  const int neededUnusedSpace = 30000000;
+
+  auto lines = readInput(filename);
+
+  Graph graph = parseInstructions(lines);
+  graph.computeDirSizes();
+
+  const int usedSpace = graph.size["/"];
+  const int currentlyUnusedSpace = totalFilesystemSize - usedSpace;
+  // cout << "Used space: " << usedSpace << endl;
+
+  vector<int> candidates;
+  for (const pair<string, vector<string>>& p : graph.adjList) {
+    if (!p.second.empty() && currentlyUnusedSpace + graph.size[p.first] >= neededUnusedSpace) {
+      candidates.push_back(graph.size[p.first]);
+    }
+  }
+
+  // printContainer(candidates);
+  return *min_element(candidates.cbegin(), candidates.cend());
 }
 
 Graph parseInstructions(const vector<string>& instructions) {
